@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 13:21:03 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 19:40:46 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/14 21:19:19 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ static void		get_field(const char **format, t_format *fmt, va_list *ap)
 		(*format)++;
 	}
 	if (**format == '*' && (*format)++)
+	{
 		*n = va_arg(*ap, int);
+		if (*n < 0 && (MINUS = 1))
+			*n = *n * -1;
+	}
 }
 
 static void		get_length(const char **format, t_format *fmt)
@@ -101,13 +105,13 @@ static void		init_format(t_format *fmt)
 {
 	RES = NULL;
 	PRECI = -1;
-	ft_strcpy(SUPP, "%diouxXcspfFb");
+	ft_strcpy(SUPP, "%dDioOuUxXcCsSpfFbB");
 	ft_strcpy(INTS, "di");
 	ft_strcpy(UNSI, "ouxXpb");
 	ft_strcpy(STRI, "s");
 	ft_strcpy(CHAR, "c%");
 	ft_strcpy(FLOT, "fF");
-	ft_strcpy(CAPS, "XF");
+	ft_strcpy(CAPS, "DOUXCSFB");
 	TREAT_TYPE[0] = &treat_int;
 	TREAT_TYPE[1] = &treat_uns;
 	TREAT_TYPE[2] = &treat_str;

@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:57:17 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 19:26:43 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/14 21:19:22 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ typedef struct		s_format
 	int		ret;
 
 	char	conv;
-	char	supp[14]; //%diouxXcspfFb
+	char	supp[20]; //%dDioOuUxXcspfFbB
 	char	type[5][10]; //5 lists of convs corresponding to a type
 	int		(*treat_type[5])(va_list*, struct s_format*);
-	char	caps[4]; //X
+	char	caps[9]; //X
 
 	int		width;
 	int		preci;

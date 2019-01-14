@@ -6,7 +6,7 @@
 #    By: evogel <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 16:47:44 by evogel            #+#    #+#              #
-#    Updated: 2019/01/11 16:30:11 by evogel           ###   ########.fr        #
+#    Updated: 2019/01/14 19:16:19 by evogel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,8 @@ SRCS_L = ft_atoi.c \
 	   ft_strsub.c \
 	   ft_strtrim.c \
 	   ft_tolower.c \
-	   ft_toupper.c
+	   ft_toupper.c \
+	   ft_capitalize.c
 
 OBJS_L = $(SRCS_L:.c=.o)
 
@@ -108,7 +109,7 @@ OBJS_L = $(SRCS_L:.c=.o)
 # DIRECTORIES #
 ###############
 
-INC = .
+INC = includes
 
 P_SRCS = srcs
 
@@ -118,7 +119,7 @@ D_OBJS = $(addprefix $(P_OBJS)/, $(OBJS))
 
 P_LIB = libft
 
-INC_L = $(P_LIB)
+INC_L = $(P_LIB)/includes
 
 P_SRCS_L = $(P_LIB)/srcs
 

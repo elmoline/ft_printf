@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 13:22:11 by evogel            #+#    #+#             */
-/*   Updated: 2018/12/19 13:53:17 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/13 23:01:53 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ char		*ft_itoabase(unsigned long long n, char *base)
 	len = get_len(n, n_base);
 	if (!(num = ft_strnew(len)))
 		return (NULL);
-	if (n == 0)
-		num[0] = base[0];
-	while (len-- >= 0 && n != 0)
+	while (len-- >= 0)
 	{
 		num[len] = base[n % n_base];
 		n /= n_base;

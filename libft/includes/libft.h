@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 16:46:52 by evogel            #+#    #+#             */
-/*   Updated: 2018/11/27 18:26:07 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/14 12:53:27 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct	s_list
 }				t_list;
 
 int				ft_atoi(const char *str);
-char			*ft_itoa(int n);
+char			*ft_itoa(long long n);
 
 int				ft_toupper(int c);
 int				ft_tolower(int c);
@@ -91,6 +91,7 @@ t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 int				ft_isupper(int c);
 int				ft_islower(int c);
+void			ft_capitalize(char *str);
 void			ft_puttab(char **tab);
 void			ft_tabdel(int i, char ***tab);
 int				ft_lstlen(t_list *lst);

@@ -6,14 +6,13 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:32:17 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/11 16:30:59 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/14 18:32:13 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
-static int	get_len(double f)
+static int	get_len(long double f)
 {
 	int		len;
 
@@ -26,11 +25,11 @@ static int	get_len(double f)
 	return (len);
 }
 
-char		*ft_flotoa(double f, int preci)
+char		*ft_flotoa(long double f, int preci)
 {
 	int					len;
 	int					i;
-	double				nb;
+	long double			nb;
 	char				*num;
 
 	nb = (f < 0 ? -f : f);
@@ -42,17 +41,14 @@ char		*ft_flotoa(double f, int preci)
 		num[0] = '-';
 	while (nb > 9)
 		nb /= 10;
-	printf("nb = %.20f\n", nb);
 	while (i < len)
 	{
 		num[i] = (int)nb + '0';
 		if (i == len - 1 && preci == 0 && (int)nb + 0.5 > (int)nb)
 			num[i]++;
 		nb -= (int)nb;
-	printf("nb = %.20f\n", nb);
 		nb *= 10;
 		i++;
-//		printf("nb = %.20f\n", nb);
 	}
 	if (preci > 0)
 		num[len++] = '.';
@@ -62,23 +58,22 @@ char		*ft_flotoa(double f, int preci)
 		nb -= (int)nb;
 		nb = nb * 10 + (preci == 1 ? 0.5 : 0);
 		--preci;
-//		printf("nb = %.20f\n", nb);
 	}
 	return (num);
 }
 
-int		treat_float(double f, t_flags *flag)
+int		treat_flt(va_list *ap, t_format *fmt)
 {
-	int		ret;
-	char	*res;
+	long double f;
 
-	res = ft_flotoa(f, (flag->preci == -1 ? 6 : flag->preci));
-	if (f >= 0 && (flag->p == 1 || flag->s == 1))
-		res = set_prefix(res, flag);
-	if (flag->width > (int)ft_strlen(res))
-		res = set_width(flag->width, res, flag);
-	ft_putstr(res);
-	ret = ft_strlen(res);
-	free(res);
-	return (ret);
+	f = get_flt(ap, fmt);
+	RES = ft_flotoa(f, (PRECI == -1 ? 6 : PRECI));
+	if (f >= 0 && (PLUS == 1 || SPACE == 1))
+		if (!(set_prefx(fmt)))
+				return (0);
+	if (WIDTH > (int)ft_strlen(RES))
+		if (!(set_width(fmt)))
+			return (0);
+	RET = ft_strlen(RES);
+	return (1);
 }

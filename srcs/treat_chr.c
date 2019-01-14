@@ -6,27 +6,27 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 18:54:03 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/11 16:30:35 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/14 19:26:47 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <unistd.h>
 
-int		treat_char(char c, t_flags *flag)
+int		treat_chr(va_list *ap, t_format *fmt)
 {
-	char	*res;
-	int		ret;
+	char c;
 
-	if (flag->width > 1)
+	c = (CONV == '%' ? '%' : (char)va_arg(*ap, int));
+	if (!(RES = ft_strnew(1)))
+		return (0);
+	RES[0] = c;
+	if (WIDTH > 1)
 	{
-		res = ft_strnew(1);
-		res[0] = c;
-		res = set_width(flag->width, res, flag);
-		write(1, res, (ret = flag->width));
-		free(res);
+		if (!(set_width(fmt)))
+			return (0);
+		RET = WIDTH;
 	}
 	else
-		write(1, &c, (ret = 1));
-	return (ret);
+		RET = 1;
+	return (1);
 }

@@ -6,13 +6,15 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 21:00:53 by evogel            #+#    #+#             */
-/*   Updated: 2018/11/15 19:07:51 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/13 22:26:41 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int		ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
-		c = c - ('a' - 'A');
+	if (ft_islower(c))
+		c = c - 32;
 	return (c);
 }

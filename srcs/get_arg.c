@@ -6,64 +6,53 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:02:30 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/11 16:29:19 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/14 17:29:37 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static long long			get_int(va_list *ap, t_flags *flag)
+long long			get_int(va_list *ap, t_format *fmt)
 {
 	long long d;
 
-	if (flag->l)
+	if (L)
 		d = (long long)va_arg(*ap, long);
-	else if (flag->ll)
+	else if (LL)
 		d = va_arg(*ap, long long);
-	else if (flag->h)
+	else if (H)
 		d = (short)va_arg(*ap, int);
-	else if (flag->hh)
+	else if (HH)
 		d = (char)va_arg(*ap, int);
 	else
 		d = (long long)va_arg(*ap, int);
 	return (d);
 }
 
-static unsigned long long	get_unsigned(va_list *ap, t_flags *flag)
+unsigned long long	get_uns(va_list *ap, t_format *fmt)
 {
 	unsigned long long u;
 
-	if (flag->l)
+	if (L)
 		u = (unsigned long long)va_arg(*ap, unsigned long);
-	else if (flag->ll || flag->c == 'p')
+	else if (LL || CONV == 'p')
 		u = va_arg(*ap, unsigned long long);
-	else if (flag->h)
+	else if (H)
 		u = (unsigned short)va_arg(*ap, unsigned int);
-	else if (flag->hh)
+	else if (HH)
 		u = (unsigned char)va_arg(*ap, unsigned int);
 	else
 		u = (unsigned long long)va_arg(*ap, unsigned int);
 	return (u);
 }
 
-int							treat_type(va_list *ap, t_flags *flag)
+long double			get_flt(va_list *ap, t_format *fmt)
 {
-	char	c;
-	int		ret;
+	long double f;
 
-	ret = 0;
-	c = flag->c;
-	if (c == 'd' || c == 'i')
-		ret = treat_int(get_int(ap, flag), flag);
-	else if (c == 'u' || c == 'o' || c == 'x' || c == 'X' || c == 'p')
-		ret = treat_unsigned(get_unsigned(ap, flag), flag);
-	else if (c == 'c' || c == '%')
-		ret = treat_char((c == '%' ? '%' : (char)va_arg(*ap, int)), flag);
-	else if (c == 's')
-		ret = treat_string(va_arg(*ap, char*), flag);
-	else if (c == 'f' && flag->l_cap == 1)
-		ret = treat_float(va_arg(*ap, long double), flag);
-	else if (c == 'f')
-		ret = treat_float(va_arg(*ap, double), flag);
-	return (ret);
+	if (FL)
+		f = va_arg(*ap, long double);
+	else
+		f = (long double)va_arg(*ap, double);
+	return (f);
 }

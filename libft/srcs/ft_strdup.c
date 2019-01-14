@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:09:29 by evogel            #+#    #+#             */
-/*   Updated: 2018/11/13 16:37:54 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/14 16:17:33 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strdup(const char *s1)
 {
 	char *s2;
 
-	if (!(s2 = ft_strnew(ft_strlen(s1))))
+	if (!s1 || !(s2 = ft_strnew(ft_strlen(s1))))
 		return (NULL);
 	return (ft_strcpy(s2, s1));
 }

@@ -6,36 +6,30 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 11:33:39 by evogel            #+#    #+#             */
-/*   Updated: 2018/12/19 14:18:59 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/14 19:26:48 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int			treat_unsigned(unsigned long long u, t_flags *flag)
+int			treat_uns(va_list *ap, t_format *fmt)
 {
-	char	*res;
-	char	c;
-	int		ret;
+	unsigned long long u;
 
-	res = NULL;
-	c = flag->c;
-	if (c == 'u')
-		res = ft_itoabase(u, "0123456789");
-	else if (c == 'o')
-		res = ft_itoabase(u, "01234567");
-	else if (c == 'x' || c == 'p')
-		res = ft_itoabase(u, "0123456789abcdef");
-	else if (c == 'X')
-		res = ft_itoabase(u, "0123456789ABCDEF");
-	res = set_preci(flag->preci, res);
-	if (c == 'p' || (flag->hs && c == 'o' && res[0] != '0')
-			|| (flag->hs && (c == 'x' || c == 'X') && u != 0))
-		res = set_prefix(res, flag);
-	if (flag->width > (int)ft_strlen(res))
-		res = set_width(flag->width, res, flag);
-	ft_putstr(res);
-	ret = ft_strlen(res);
-	free(res);
-	return (ret);
+	u = get_uns(ap, fmt);
+	if (!(RES = ft_itoabase(u, BASE)))
+		return (0);
+	if (!(set_preci(fmt)))
+		return (0);
+	if ((HASH && ((CONV == 'o' && RES[0] != '0') || (CONV == 'x' && u != 0)))
+				|| CONV == 'p') //when preci already put 0 in front of octal, no need to add prefix && hexa no prefix when 0
+		if (!(set_prefx(fmt)))
+			return (0);
+	if (WIDTH > (int)ft_strlen(RES))
+		if (!(set_width(fmt)))
+			return (0);
+	if (CAP == 1)
+		ft_capitalize(RES);
+	RET = ft_strlen(RES);
+	return (1);
 }

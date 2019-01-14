@@ -6,50 +6,40 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 13:22:11 by evogel            #+#    #+#             */
-/*   Updated: 2018/11/20 17:00:45 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/14 13:45:37 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_len(long n)
+static int	get_len(unsigned long long n)
 {
-	int		neg;
 	int		len;
 
-	neg = 0;
 	len = 1;
-	if (n < 0)
-	{
-		neg = 1;
-		n = -n;
-	}
 	while (n > 9)
 	{
 		len++;
 		n /= 10;
 	}
-	return (len + neg);
+	return (len);
 }
 
-char		*ft_itoa(int n)
+char		*ft_itoa(long long n)
 {
-	int		len;
-	long	nb;
-	char	*num;
+	int					len;
+	unsigned long long	nb;
+	char				*num;
+	int					neg;
 
-	nb = n;
-	len = get_len(nb);
-	if (!(num = ft_strnew(len)))
+	neg = (n < 0 ? 1 : 0);
+	nb = (neg == 1 ? -n : n);
+	len = get_len(nb) + neg;
+	if (!(num = ft_strnew(len + neg)))
 		return (NULL);
-	if (nb < 0)
-	{
+	if (neg == 1)
 		num[0] = '-';
-		nb = -nb;
-	}
-	if (nb == 0)
-		num[0] = '0';
-	while (len-- >= 0 && nb != 0)
+	while (--len >= neg)
 	{
 		num[len] = nb % 10 + '0';
 		nb /= 10;

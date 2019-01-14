@@ -6,43 +6,68 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:22:05 by evogel            #+#    #+#             */
-/*   Updated: 2018/12/19 14:19:44 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/14 19:40:57 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <unistd.h>
 
-int		dispatcher(va_list *ap, const char **fmt)
+int		treatment(va_list *ap, t_format *fmt)
 {
-	t_flags	*flag;
-	int		ret;
+	int i;
 
-	if (!(flag = get_flags(fmt, ap)))
-		return (-1);
-	flag->c = **fmt;
-	++(*fmt);
-	ret = treat_type(ap, flag);
-	free(flag);
+	i = 0;
+	while (!ft_strchr(TYPE[i], CONV) && i < 5)
+		i++;
+	if (!TREAT_TYPE[i](ap, fmt))
+		return (0);
+	return (1);
+}
+
+int		converter(va_list *ap, const char **format)
+{
+	t_format	*fmt;
+	int			ret;
+
+	if (!(fmt = get_format(ap, format)))
+		return (0);
+	if (!treatment(ap, fmt))
+	{
+		if (RES)
+			free(RES);
+		ft_memdel((void**)&fmt);
+		return (0);
+	}
+	write(1, RES, RET);
+	ret = RET;
+	free(RES);
+	ft_memdel((void**)&fmt);
 	return (ret);
 }
 
-int		ft_printf(const char *fmt, ...)
+//adjust GET_ARG to use new struct strings
+
+//changed names of structure, must carry to the rest of functions
+//have to make error cases checks and securities for mallocs etc
+
+int		ft_printf(const char *format, ...)
 {
 	va_list ap;
 	int		ret;
 
 	ret = 0;
-	va_start(ap, fmt);
-	while (*fmt)
+	va_start(ap, format);
+	while (*format)
 	{
-		if (*fmt == '%')
+		if (*format == '%')
 		{
-			++fmt;
-			ret += dispatcher(&ap, &fmt);
+			++format;
+			ret += converter(&ap, &format);
 		}
 		else
 		{
-			ft_putchar(*fmt++);
+			ft_putchar(*format++);
 			++ret;
 		}
 	}

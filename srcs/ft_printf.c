@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:22:05 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 21:19:21 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/14 21:21:48 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ int		converter(va_list *ap, const char **format)
 	return (ret);
 }
 
-//adjust GET_ARG to use new struct strings
-
-//changed names of structure, must carry to the rest of functions
-//have to make error cases checks and securities for mallocs etc
+//CHECK THAT CAPITAL LETTER CONVERTERS ARE WORKING
 
 int		ft_printf(const char *format, ...)
 {

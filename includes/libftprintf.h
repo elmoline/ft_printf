@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:57:17 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 21:19:22 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/15 17:54:20 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 # define FLOT fmt->type[4]
 # define TREAT_TYPE fmt->treat_type
 # define CAPS fmt->caps
+# define LLEN fmt->llen
 
 typedef struct		s_format
 {
@@ -63,7 +64,8 @@ typedef struct		s_format
 	char	supp[20]; //%dDioOuUxXcspfFbB
 	char	type[5][10]; //5 lists of convs corresponding to a type
 	int		(*treat_type[5])(va_list*, struct s_format*);
-	char	caps[9]; //X
+	char	caps[5]; //X
+	char	llen[5];
 
 	int		width;
 	int		preci;
@@ -97,5 +99,12 @@ char				*ft_itoabase(unsigned long long n, char *base);
 char				*ft_malloc_c(size_t size, char c);
 int					error_1(void);
 int					error_2(void);
+
+typedef struct	s_colors
+{
+	char	colors[13][2][20];
+}				t_colors;
+
+void			color_manager(const char **format);
 
 #endif

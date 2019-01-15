@@ -6,7 +6,7 @@
 #    By: evogel <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 16:47:44 by evogel            #+#    #+#              #
-#    Updated: 2019/01/14 21:05:38 by evogel           ###   ########.fr        #
+#    Updated: 2019/01/15 17:54:33 by evogel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS = ft_printf.c \
 	   treat_uns.c \
 	   treat_chr.c \
 	   treat_str.c \
-	   treat_flt.c
+	   treat_flt.c \
+	   color_manager.c
 
 OBJS = $(SRCS:.c=.o)
 

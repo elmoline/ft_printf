@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:22:05 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 21:21:48 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/15 18:01:31 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int		converter(va_list *ap, const char **format)
 	return (ret);
 }
 
-//CHECK THAT CAPITAL LETTER CONVERTERS ARE WORKING
-
 int		ft_printf(const char *format, ...)
 {
 	va_list ap;
@@ -62,6 +60,8 @@ int		ft_printf(const char *format, ...)
 			++format;
 			ret += converter(&ap, &format);
 		}
+		else if (*format == '{')
+			color_manager(&format); //STRNSTR wrong function, pls fix
 		else
 		{
 			ft_putchar(*format++);

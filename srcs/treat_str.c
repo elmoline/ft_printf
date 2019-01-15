@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 14:46:29 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 21:19:32 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/15 14:54:52 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int			treat_str(va_list *ap, t_format *fmt)
 	if (WIDTH > (int)ft_strlen(RES))
 		if (!(set_width(fmt)))
 			return (0);
+	if (CAP == 1)
+		ft_capitalize(RES);
 	RET = ft_strlen(RES);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 13:21:03 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 21:19:19 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/15 15:37:20 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,14 @@ static int		get_converter(const char **format, t_format *fmt)
 		CAP = 1;
 		CONV = CONV + 32;
 	}
+	if (ft_strchr(LLEN, CONV))
+	{
+		if (L == 1 && (LL = 1))
+			L = 0;
+		else 
+			L = 1;
+		CONV = CONV + 32;
+	}
 	return (1);
 }
 
@@ -106,12 +114,13 @@ static void		init_format(t_format *fmt)
 	RES = NULL;
 	PRECI = -1;
 	ft_strcpy(SUPP, "%dDioOuUxXcCsSpfFbB");
-	ft_strcpy(INTS, "di");
-	ft_strcpy(UNSI, "ouxXpb");
-	ft_strcpy(STRI, "s");
-	ft_strcpy(CHAR, "c%");
+	ft_strcpy(INTS, "dDi");
+	ft_strcpy(UNSI, "oOuUxXpbB");
+	ft_strcpy(STRI, "sS");
+	ft_strcpy(CHAR, "cC%");
 	ft_strcpy(FLOT, "fF");
-	ft_strcpy(CAPS, "DOUXCSFB");
+	ft_strcpy(CAPS, "XCSB");
+	ft_strcpy(LLEN, "DOUF");
 	TREAT_TYPE[0] = &treat_int;
 	TREAT_TYPE[1] = &treat_uns;
 	TREAT_TYPE[2] = &treat_str;
@@ -131,6 +140,7 @@ static void		init_format(t_format *fmt)
 	printf("char = [%s]\n", CHAR);
 	printf("flot = [%s]\n", FLOT);
 	printf("caps = [%s]\n", CAPS);
+	printf("llen = [%s]\n", LLEN);
 	printf("width = [%d]\n", WIDTH);
 	printf("preci = [%d]\n", PRECI);
 	printf("hash = [%d]\n", HASH);

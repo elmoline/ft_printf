@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 18:54:03 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 21:19:30 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/15 14:54:34 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ int		treat_chr(va_list *ap, t_format *fmt)
 	}
 	else
 		RET = 1;
+	if (CAP == 1)
+		ft_capitalize(RES);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 16:40:46 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 21:19:17 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/15 18:00:41 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include <stdio.h>
 #include <limits.h>
 #include <float.h>
+
+void	test_ints(void)
+{
+		printf("printf\t\t: |%*O|\n", -5, 42);
+	ft_printf("ft_printf\t: |%*O|\n", -5, 42);
+}
 
 int		main(void)
 {
@@ -25,11 +31,10 @@ int		main(void)
 
 //		printf("printf\t\t: [%Lf]\n", LDBL_MAX);
 //		printf("printf\t\t: [%f]\n", DBL_MAX);
-		printf("printf\t\t: |%*O|\n", -5, 42);
-	ft_printf("ft_printf\t: |%*O|\n", -5, 42);
+		printf("{bold cyan}printf{eoc}\t\t: {red}|%5ld.|{eoc}\n", LONG_MAX);
+	ft_printf("{bold cyan}ft_printf{eoc}\t: {red}|%5lB.|{eoc}\n", "0abcdefghi", LONG_MAX);
 	return (0);
 }
 
 //NOTES:
-//- BONUS: make printf to any base with * agr being base chars
 //- make and ft_usage for checking that all the flags are in order and if they aren't, print a "usgae" instruction and exit

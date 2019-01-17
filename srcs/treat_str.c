@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 14:46:29 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/15 14:54:52 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/17 13:39:03 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static int	set_preci_s(t_format *fmt)
 	return (1);
 }
 
-int			treat_str(va_list *ap, t_format *fmt)
+int			treat_str(t_format *fmt)
 {
-	if (!(RES = ft_strdup(va_arg(*ap, char*))))
+	if (!(RES = ft_strdup(va_arg(AP, char*))))
 		RES = ft_strdup("(null)");
 	if (!(set_preci_s(fmt)))
 		return (0);

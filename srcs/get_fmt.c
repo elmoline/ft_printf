@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 13:21:03 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/15 15:37:20 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/17 14:56:35 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@ static int		get_flag(char c, t_format *fmt)
 		return (1);
 	else if (c == ' ' && (SPACE = 1))
 		return (1);
+	else if (c == '_' && (FILL = (unsigned char)va_arg(AP, int)))
+		return (1);
+	else if (c == '|' && (MID  = 1))
+		return (1);
 	return (0);
 }
 
-static void		get_field(const char **format, t_format *fmt, va_list *ap)
+static void		get_field(const char **format, t_format *fmt)
 {
 	int	*n;
 	int	i;
@@ -47,7 +51,7 @@ static void		get_field(const char **format, t_format *fmt, va_list *ap)
 	}
 	if (**format == '*' && (*format)++)
 	{
-		*n = va_arg(*ap, int);
+		*n = va_arg(AP, int);
 		if (*n < 0 && (MINUS = 1))
 			*n = *n * -1;
 	}
@@ -97,17 +101,24 @@ static int		get_converter(const char **format, t_format *fmt)
 	return (1);
 }
 
-static void		get_base(va_list *ap, t_format *fmt)
+static void		get_base(t_format *fmt)
 {
 	if (CONV == 'o')
 		ft_strcpy(BASE, "01234567");
 	else if (CONV == 'x' || CONV == 'p')
 		ft_strcpy(BASE, "0123456789abcdef");
 	else if (CONV == 'b')
-		ft_strcpy(BASE, va_arg(*ap, char*));
+		ft_strcpy(BASE, va_arg(AP, char*));
 	else 
 		ft_strcpy(BASE, "0123456789");
 }
+
+/*
+** Tout commence a zero (car memalloc)
+** preci doit etre -1 parce qu'une precision de 0 existe
+** Initialisation des strings des convertisseurs corespondant a un certain type
+** Init de tableau de fonctions correspondant aux types
+*/
 
 static void		init_format(t_format *fmt)
 {
@@ -128,35 +139,15 @@ static void		init_format(t_format *fmt)
 	TREAT_TYPE[4] = &treat_flt;
 }
 
-/*void			print_format(t_format *fmt)
-{
-	printf("res = [%s]\n", RES);
-	printf("ret = [%d]\n", RET);
-	printf("conv = [%c]\n", CONV);
-	printf("supp = [%s]\n", SUPP);
-	printf("ints = [%s]\n", INTS);
-	printf("unsi = [%s]\n", UNSI);
-	printf("stri = [%s]\n", STRI);
-	printf("char = [%s]\n", CHAR);
-	printf("flot = [%s]\n", FLOT);
-	printf("caps = [%s]\n", CAPS);
-	printf("llen = [%s]\n", LLEN);
-	printf("width = [%d]\n", WIDTH);
-	printf("preci = [%d]\n", PRECI);
-	printf("hash = [%d]\n", HASH);
-	printf("zero = [%d]\n", ZERO);
-	printf("minus = [%d]\n", MINUS);
-	printf("plus = [%d]\n", PLUS);
-	printf("space = [%d]\n", SPACE);
-	printf("l = [%d]\n", L);
-	printf("ll = [%d]\n", LL);
-	printf("h = [%d]\n", H);
-	printf("hh = [%d]\n", HH);
-	printf("L = [%d]\n", FL);
-	printf("neg = [%d]\n", NEG);
-	printf("cap = [%d]\n", CAP);
-	printf("base = [%s]\n", BASE);
-}*/
+/*
+** get_format initialise la structure
+** lis les flags
+** puis la width
+** puis la precision
+** puis la taille de l'argument (l, hh, etc)
+** puis le convertisseur
+** et choisi une base selon le convertisseur
+*/
 
 t_format		*get_format(va_list *ap, const char **format)
 {
@@ -164,18 +155,18 @@ t_format		*get_format(va_list *ap, const char **format)
 
 	if (!(fmt = (t_format*)ft_memalloc(sizeof(t_format))))
 		return (NULL);
+	fmt->ap = ap;
 	init_format(fmt);
 	while (get_flag(**format, fmt) == 1)
 		(*format)++;
-	get_field(format, fmt, ap);
-	get_field(format, fmt, ap);
+	get_field(format, fmt);
+	get_field(format, fmt);
 	get_length(format, fmt);
 	if (!get_converter(format, fmt))
 	{
 		ft_memdel((void**)&fmt);
 		return (NULL);
 	}
-	get_base(ap, fmt);
-//	print_format(fmt);
+	get_base(fmt);
 	return (fmt);
 }

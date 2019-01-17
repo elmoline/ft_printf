@@ -6,17 +6,17 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 11:33:39 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 21:19:29 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/17 15:36:37 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int			treat_uns(va_list *ap, t_format *fmt)
+int			treat_uns(t_format *fmt)
 {
 	unsigned long long u;
 
-	u = get_uns(ap, fmt);
+	u = get_uns(fmt);
 	if (!(RES = ft_itoabase(u, BASE)))
 		return (0);
 	if (!(set_preci(fmt)))

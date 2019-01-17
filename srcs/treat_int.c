@@ -6,17 +6,17 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:34:02 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 21:19:27 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/17 13:38:44 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		treat_int(va_list *ap, t_format *fmt)
+int		treat_int(t_format *fmt)
 {
 	long long d;
 
-	d = get_int(ap, fmt);
+	d = get_int(fmt);
 	NEG = (d < 0 ? 1 : 0);
 	if (!(RES = ft_itoa(d)))
 		return (0);

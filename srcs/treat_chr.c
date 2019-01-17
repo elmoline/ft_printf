@@ -6,17 +6,17 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 18:54:03 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/15 14:54:34 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/17 13:43:56 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		treat_chr(va_list *ap, t_format *fmt)
+int		treat_chr(t_format *fmt)
 {
 	char c;
 
-	c = (CONV == '%' ? '%' : (char)va_arg(*ap, int));
+	c = (CONV == '%' ? '%' : (char)va_arg(AP, int));
 	if (!(RES = ft_strnew(1)))
 		return (0);
 	RES[0] = c;

@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 16:40:46 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/15 18:00:41 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/17 21:29:49 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,30 @@
 #include <limits.h>
 #include <float.h>
 
-void	test_ints(void)
+void	test_colors(void)
 {
-		printf("printf\t\t: |%*O|\n", -5, 42);
-	ft_printf("ft_printf\t: |%*O|\n", -5, 42);
+	int i;
+
+	i = 0;
+	while (i < 256)
+	{
+		ft_printf("{#}[%d]", i, i);
+		ft_printf("{##}[%d]{eoc}", i, i);
+		i++;
+	}
 }
 
 int		main(void)
 {
 //	char 	*test = NULL;
-//	unsigned int	d = 4294967295;
+	unsigned int	d = 4294967295;
 //	void	*p = &test;
-//	double		f = 9223372030.8375990295;
-//	long double	lf = 92233720368547758089223372036854775808922337203685477580892233720368547758089223372036854775808.9223372036854775808;
+	double		f = 9.5;
 
 //		printf("printf\t\t: [%Lf]\n", LDBL_MAX);
 //		printf("printf\t\t: [%f]\n", DBL_MAX);
-		printf("{bold cyan}printf{eoc}\t\t: {red}|%5ld.|{eoc}\n", LONG_MAX);
-	ft_printf("{bold cyan}ft_printf{eoc}\t: {red}|%5lB.|{eoc}\n", "0abcdefghi", LONG_MAX);
+	    				  	 printf("printf\t\t: |%.1000f|\n", f);
+	ft_printf("{b_white}{##}ft_printf\t:{eoc} {#}|%.1000f|{eoc}\n", 54, 208, f);
+//	test_colors();
 	return (0);
 }
-
-//NOTES:
-//- make and ft_usage for checking that all the flags are in order and if they aren't, print a "usgae" instruction and exit

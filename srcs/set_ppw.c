@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   set_ppw.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:25:52 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/17 15:36:43 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/18 12:51:58 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int			set_prefx(t_format *fmt)
 ** Get correct char to fill spaces with: '0' or ' ' depending
 ** Create new string with filler char
 ** copy back original string following certain conditions:
-** when copying in front, make sure string doesn't end early because of copied '\0'** when '0' fill && prefix, copy at end without prefix then add prefix in front
+** when copying in front, make sure str doesn't end early because of copied '\0'
+** when '0' fill && prefix, copy at end without prefix then add prefix in front
 ** in all other cases, copy at end normally
 */
 
@@ -114,12 +115,12 @@ int			set_width(t_format *fmt)
 	if (!(tmp = ft_malloc_c(WIDTH, c)))
 		return (0);
 	if (MID == 1)
-		ft_memcpy(tmp + (WIDTH / 2) - ((len + 1) / 2), RES, len);
+		ft_memcpy(tmp + (WIDTH / 2) - (len / 2), RES, len);
 	else if (MINUS && ft_memcpy(tmp, RES, len))
 		tmp[len] = c;
 	else if (c == '0' && (add = zero_fill(fmt)))
 	{
-		ft_strcpy(tmp + (WIDTH - len) + add, RES + add);
+		ft_memcpy(tmp + (WIDTH - len) + add, RES + add, len);
 		tmp[add - 1] = RES[add - 1];
 	}
 	else

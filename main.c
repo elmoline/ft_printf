@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 16:40:46 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/17 21:29:49 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/18 13:45:39 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,24 @@ void	test_colors(void)
 	i = 0;
 	while (i < 256)
 	{
-		ft_printf("{#}[%d]", i, i);
-		ft_printf("{##}[%d]{eoc}", i, i);
+		ft_printf("{#}[%3d", i, i);
+		ft_printf("{black}{##}%3c]{eoc} ", i, ' ');
+		if ((i % 6 == 3 && i > 15)|| (i < 15 && i % 6 == 0) || i == 15)
+			ft_putchar('\n');
+		if (i % 36 == 15)
+			ft_putchar('\n');
 		i++;
 	}
 }
 
 int		main(void)
 {
-//	char 	*test = NULL;
-	unsigned int	d = 4294967295;
-//	void	*p = &test;
-	double		f = 9.5;
+//	unsigned int	d = 4294967295;
+	long double		lf = (long double)ULLONG_MAX;
+	double			f = 9.8654563;
 
-//		printf("printf\t\t: [%Lf]\n", LDBL_MAX);
-//		printf("printf\t\t: [%f]\n", DBL_MAX);
-	    				  	 printf("printf\t\t: |%.1000f|\n", f);
-	ft_printf("{b_white}{##}ft_printf\t:{eoc} {#}|%.1000f|{eoc}\n", 54, 208, f);
-//	test_colors();
+							 printf("printf\t\t: |%.f|\n", f);
+	ft_printf("{b_white}{##}ft_printf\t:{eoc} {#}|%.f|{eoc}\n", 54, 208, f);
+	test_colors();
 	return (0);
 }

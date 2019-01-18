@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:02:30 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/17 15:12:50 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/18 13:46:48 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ unsigned long long	get_uns(t_format *fmt)
 	return (u);
 }
 
-double				get_flt(t_format *fmt)
+long double			get_flt(t_format *fmt)
 {
-	double f;
+	long double f;
 
 	if (FL)
 		f = va_arg(AP, long double);
 	else
-		f = va_arg(AP, double);
+		f = (long double)va_arg(AP, double);
 	return (f);
 }

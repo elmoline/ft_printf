@@ -6,7 +6,7 @@
 #    By: evogel <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 16:47:44 by evogel            #+#    #+#              #
-#    Updated: 2019/01/16 17:50:12 by evogel           ###   ########.fr        #
+#    Updated: 2019/01/18 12:45:41 by evogel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,16 +27,17 @@ SANITIZE = -fsanitize=address
 #########
 
 SRCS = ft_printf.c \
-	   ft_itoabase.c \
-	   ft_flotoa.c \
-	   tools.c \
 	   get_fmt.c \
+	   get_fns.c \
 	   get_arg.c \
 	   treat_int.c \
 	   treat_uns.c \
 	   treat_chr.c \
 	   treat_str.c \
 	   treat_flt.c \
+	   set_ppw.c \
+	   ft_itoabase.c \
+	   ft_flotoa.c \
 	   color_manager.c
 
 OBJS = $(SRCS:.c=.o)

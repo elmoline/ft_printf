@@ -6,7 +6,7 @@
 #    By: evogel <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 16:47:44 by evogel            #+#    #+#              #
-#    Updated: 2019/01/18 12:45:41 by evogel           ###   ########.fr        #
+#    Updated: 2019/01/18 15:41:02 by evogel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CC = gcc
 
 CFLAGS = #-Wall -Wextra -Werror
 
-SANITIZE = -fsanitize=address
+SANITIZE = -g -g3 #-fsanitize=address
 
 #########
 # FILES #

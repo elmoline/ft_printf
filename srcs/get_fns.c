@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 11:32:05 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/18 11:44:09 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/18 17:28:18 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,26 @@ int		get_flag(char c, t_format *fmt)
 void	get_field(const char **format, t_format *fmt)
 {
 	int	*n;
-	int	i;
+	int	tmp;
 
-	i = 1;
-	if (**format == '.' && (*format)++)
+	if ((**format == '.' && (*format)++) || (WIDTH && **format == '*'))
 	{
 		n = &PRECI;
 		*n = 0;
 	}
 	else
 		n = &WIDTH;
+	tmp = 0;
 	while (ft_isdigit(**format) == 1)
 	{
-		*n = *n * 10 + (**format - '0');
+		tmp = tmp * 10 + (**format - '0');
+		*n = tmp;
 		(*format)++;
 	}
 	if (**format == '*' && (*format)++)
 	{
 		*n = va_arg(AP, int);
-		if (*n < 0 && (MINUS = 1))
+		if (n == &WIDTH && *n < 0 && (MINUS = 1))
 			*n = *n * -1;
 	}
 }
@@ -79,10 +80,13 @@ void	get_length(const char **format, t_format *fmt)
 		FL = 1;
 }
 
-int		get_converter(const char **format, t_format *fmt)
+void	get_converter(const char **format, t_format *fmt)
 {
 	if (!ft_strchr(SUPP, **format) || **format == '\0')
-		return (0);
+	{
+		CONV = '\0';
+		return ;
+	}
 	CONV = **format;
 	(*format)++;
 	if (ft_strchr(CAPS, CONV))
@@ -98,7 +102,6 @@ int		get_converter(const char **format, t_format *fmt)
 			L = 1;
 		CONV = CONV + 32;
 	}
-	return (1);
 }
 
 void	get_base(t_format *fmt)

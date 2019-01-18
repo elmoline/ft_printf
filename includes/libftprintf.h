@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:57:17 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/18 13:37:20 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/18 15:47:06 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ int					ft_printf(const char *fmt, ...);
 int					converter(va_list *ap, const char **format);
 int					treatment(t_format *fmt);
 
-t_format			*get_format(va_list *ap, const char **format);
+t_format			get_format(va_list *ap, const char **format);
 int					get_flag(char c, t_format *fmt);
 void				get_field(const char **format, t_format *fmt);
 void				get_length(const char **format, t_format *fmt);
-int					get_converter(const char **format, t_format *fmt);
+void				get_converter(const char **format, t_format *fmt);
 void				get_base(t_format *fmt);
 
 int					treat_int(t_format *fmt);

@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:25:52 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/18 12:51:58 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/18 17:17:47 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int			set_prefx(t_format *fmt)
 
 /*
 ** When getting len, len is 1 for char conv
-** Get correct char to fill spaces with: '0' or ' ' depending
+** Get correct char to fill spaces with: '0' or ' ' or arg depending
 ** Create new string with filler char
 ** copy back original string following certain conditions:
 ** when copying in front, make sure str doesn't end early because of copied '\0'
@@ -102,6 +102,16 @@ static int	zero_fill(t_format *fmt)
 	return (0);
 }
 
+static char	get_char(t_format *fmt)
+{
+	if (FILL)
+		return (FILL);
+	else if (ZERO && !MINUS && !MID && (PRECI < 0 || ft_strchr("fsc%", CONV)))
+			return ('0');
+	else
+		return (' ');
+}
+
 int			set_width(t_format *fmt)
 {
 	char	c;
@@ -110,8 +120,7 @@ int			set_width(t_format *fmt)
 	int		add;
 
 	len = (CONV == 'c' ? 1 : (int)ft_strlen(RES));
-	c = (ZERO && !MINUS && !MID && (PRECI == -1 || CONV == 'f') ? '0' : ' ');
-	c = (FILL ? FILL : c);
+	c = get_char(fmt);
 	if (!(tmp = ft_malloc_c(WIDTH, c)))
 		return (0);
 	if (MID == 1)

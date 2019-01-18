@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 16:40:46 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/18 13:45:39 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/18 17:42:58 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	test_colors(void)
 int		main(void)
 {
 //	unsigned int	d = 4294967295;
-	long double		lf = (long double)ULLONG_MAX;
-	double			f = 9.8654563;
+//	long double		lf = (long double)ULLONG_MAX;
+//	double			f = 126.550;
 
-							 printf("printf\t\t: |%.f|\n", f);
-	ft_printf("{b_white}{##}ft_printf\t:{eoc} {#}|%.f|{eoc}\n", 54, 208, f);
-	test_colors();
+							  printf("printf\t\t: |%-15s|\n", NULL);
+	ft_printf("{bb_red}ft_printf\t:{eoc} {magenta}|%-15s|{eoc}\n", NULL);
+//	test_colors();
 	return (0);
 }

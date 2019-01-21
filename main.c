@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 16:40:46 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/18 17:42:58 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/21 17:35:25 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	test_colors(void)
 	{
 		ft_printf("{#}[%3d", i, i);
 		ft_printf("{black}{##}%3c]{eoc} ", i, ' ');
-		if ((i % 6 == 3 && i > 15)|| (i < 15 && i % 6 == 0) || i == 15)
+		if ((i % 6 == 3 && i > 15) || (i < 15 && i % 6 == 0) || i == 15)
 			ft_putchar('\n');
 		if (i % 36 == 15)
 			ft_putchar('\n');
@@ -34,12 +34,8 @@ void	test_colors(void)
 
 int		main(void)
 {
-//	unsigned int	d = 4294967295;
-//	long double		lf = (long double)ULLONG_MAX;
-//	double			f = 126.550;
-
-							  printf("printf\t\t: |%-15s|\n", NULL);
-	ft_printf("{bb_red}ft_printf\t:{eoc} {magenta}|%-15s|{eoc}\n", NULL);
-//	test_colors();
+	printf("printf\t\t: |%0#x|\n", 12345);
+	ft_printf("{bb_red}ft_printf\t:{eoc} {magenta}|%0#x|{eoc}\n", 12345);
+	test_colors();
 	return (0);
 }

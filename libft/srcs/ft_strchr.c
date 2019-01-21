@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 11:17:20 by evogel            #+#    #+#             */
-/*   Updated: 2018/12/19 15:32:29 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/21 16:48:20 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strchr(const char *s, int c)
 	{
 		if (s[i] == (char)c)
 			return ((char*)(s + i));
-		i++;
+		++i;
 	}
 	return (NULL);
 }

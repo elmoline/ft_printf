@@ -6,7 +6,7 @@
 #    By: evogel <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 16:47:44 by evogel            #+#    #+#              #
-#    Updated: 2019/01/18 15:41:02 by evogel           ###   ########.fr        #
+#    Updated: 2019/01/21 17:34:26 by evogel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ NAME = libftprintf.a
 
 CC = gcc
 
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
-SANITIZE = -g -g3 #-fsanitize=address
+SANITIZE = -fsanitize=address
 
 #########
 # FILES #
@@ -38,6 +38,7 @@ SRCS = ft_printf.c \
 	   set_ppw.c \
 	   ft_itoabase.c \
 	   ft_flotoa.c \
+	   ft_setmalloc.c \
 	   color_manager.c
 
 OBJS = $(SRCS:.c=.o)

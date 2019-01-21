@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:02:05 by evogel            #+#    #+#             */
-/*   Updated: 2018/11/13 16:23:25 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/21 17:24:15 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	i;
+	const char *str;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	str = s;
+	while (*s)
+		++s;
+	return (s - str);
 }

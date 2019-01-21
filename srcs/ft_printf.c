@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:22:05 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/18 16:59:35 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/21 17:05:20 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		treatment(t_format *fmt)
 
 	i = 0;
 	while (!ft_strchr(TYPE[i], CONV) && i < 5)
-		i++;
+		++i;
 	if (!TREAT_TYPE[i](fmt))
 		return (0);
 	return (1);
@@ -39,21 +39,23 @@ int		treatment(t_format *fmt)
 
 int		converter(va_list *ap, const char **format)
 {
-	t_format	fmt;
+	t_format	*fmt;
 	int			ret;
 
-	fmt = get_format(ap, format);
-	if (fmt.conv == '\0')
+	if (!(fmt = get_format(ap, format)))
 		return (0);
-	if (!treatment(&fmt))
+	if (!treatment(fmt))
 	{
-		if (fmt.res)
-			free(fmt.res);
+		if (RES)
+			free(RES);
+		free(fmt);
 		return (0);
 	}
-	write(1, fmt.res, fmt.ret);
-	free(fmt.res);
-	return (fmt.ret);
+	write(1, RES, RET);
+	ret = RET;
+	free(RES);
+	free(fmt);
+	return (ret);
 }
 
 /*

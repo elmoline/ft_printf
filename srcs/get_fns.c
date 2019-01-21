@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 11:32:05 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/18 17:28:18 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/21 17:11:20 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	get_field(const char **format, t_format *fmt)
 	int	*n;
 	int	tmp;
 
-	if ((**format == '.' && (*format)++) || (WIDTH && **format == '*'))
+	if ((**format == '.' && ++(*format)) || (WIDTH && **format == '*'))
 	{
 		n = &PRECI;
 		*n = 0;
@@ -48,9 +48,9 @@ void	get_field(const char **format, t_format *fmt)
 	{
 		tmp = tmp * 10 + (**format - '0');
 		*n = tmp;
-		(*format)++;
+		++(*format);
 	}
-	if (**format == '*' && (*format)++)
+	if (**format == '*' && ++(*format))
 	{
 		*n = va_arg(AP, int);
 		if (n == &WIDTH && *n < 0 && (MINUS = 1))
@@ -62,33 +62,30 @@ void	get_length(const char **format, t_format *fmt)
 {
 	if (**format == 'l')
 	{
-		(*format)++;
-		if (**format == 'l' && (*format)++)
+		++(*format);
+		if (**format == 'l' && ++(*format))
 			LL = 1;
 		else
 			L = 1;
 	}
 	else if (**format == 'h')
 	{
-		(*format)++;
-		if (**format == 'h' && (*format)++)
+		++(*format);
+		if (**format == 'h' && ++(*format))
 			HH = 1;
 		else
 			H = 1;
 	}
-	else if (**format == 'L' && (*format)++)
+	else if (**format == 'L' && ++(*format))
 		FL = 1;
 }
 
-void	get_converter(const char **format, t_format *fmt)
+int		get_converter(const char **format, t_format *fmt)
 {
-	if (!ft_strchr(SUPP, **format) || **format == '\0')
-	{
-		CONV = '\0';
-		return ;
-	}
+	if (**format == '\0' || !ft_strchr(SUPP, **format))
+		return (0);
 	CONV = **format;
-	(*format)++;
+	++(*format);
 	if (ft_strchr(CAPS, CONV))
 	{
 		CAP = 1;
@@ -102,6 +99,7 @@ void	get_converter(const char **format, t_format *fmt)
 			L = 1;
 		CONV = CONV + 32;
 	}
+	return (1);
 }
 
 void	get_base(t_format *fmt)

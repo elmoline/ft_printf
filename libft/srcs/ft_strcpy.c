@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:13:47 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/14 13:05:49 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/21 16:46:01 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strcpy(char *dst, const char *src)
 	while (src[i])
 	{
 		dst[i] = src[i];
-		i++;
+		++i;
 	}
 	dst[i] = '\0';
 	return (dst);

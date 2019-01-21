@@ -6,21 +6,11 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:25:52 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/18 17:17:47 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/21 17:31:33 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-char		*ft_malloc_c(size_t size, char c)
-{
-	char	*res;
-
-	if (!(res = ft_strnew(size)))
-		return (NULL);
-	ft_memset(res, c, size);
-	return (res);
-}
 
 /*
 ** Preci mallocs at new size filled with zeros
@@ -37,7 +27,7 @@ int			set_preci(t_format *fmt)
 	len = ft_strlen(RES) - NEG;
 	if (PRECI > len)
 	{
-		if (!(tmp = ft_malloc_c(PRECI + NEG, '0')))
+		if (!(tmp = ft_setmalloc(PRECI + NEG, '0')))
 			return (0);
 		ft_strcpy(tmp + (PRECI - len) + NEG, RES + NEG);
 		if (NEG)
@@ -69,7 +59,7 @@ int			set_prefx(t_format *fmt)
 	int		add;
 
 	add = (CONV == 'x' || CONV == 'p' ? 2 : 1);
-	if (!(tmp = ft_malloc_c(ft_strlen(RES) + add, '0')))
+	if (!(tmp = ft_setmalloc(ft_strlen(RES) + add, '0')))
 		return (0);
 	ft_strcpy(tmp + add, RES);
 	if (CONV != 'x' && CONV != 'o' && CONV != 'p')
@@ -95,7 +85,7 @@ static int	zero_fill(t_format *fmt)
 {
 	if (CONV == 's' || CONV == 'c')
 		return (0);
-	else if (HASH && CONV == 'x')
+	else if (HASH && CONV == 'x' && RES[1])
 		return (2);
 	else if (CONV != 'x' && (PLUS || SPACE || NEG))
 		return (1);
@@ -107,7 +97,7 @@ static char	get_char(t_format *fmt)
 	if (FILL)
 		return (FILL);
 	else if (ZERO && !MINUS && !MID && (PRECI < 0 || ft_strchr("fsc%", CONV)))
-			return ('0');
+		return ('0');
 	else
 		return (' ');
 }
@@ -121,7 +111,7 @@ int			set_width(t_format *fmt)
 
 	len = (CONV == 'c' ? 1 : (int)ft_strlen(RES));
 	c = get_char(fmt);
-	if (!(tmp = ft_malloc_c(WIDTH, c)))
+	if (!(tmp = ft_setmalloc(WIDTH, c)))
 		return (0);
 	if (MID == 1)
 		ft_memcpy(tmp + (WIDTH / 2) - (len / 2), RES, len);
@@ -129,7 +119,7 @@ int			set_width(t_format *fmt)
 		tmp[len] = c;
 	else if (c == '0' && (add = zero_fill(fmt)))
 	{
-		ft_memcpy(tmp + (WIDTH - len) + add, RES + add, len);
+		ft_memcpy(tmp + (WIDTH - len) + add, RES + add, len - add);
 		tmp[add - 1] = RES[add - 1];
 	}
 	else

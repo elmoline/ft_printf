@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:38:26 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/18 16:21:56 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/21 16:41:34 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		color_manager(va_list *ap, const char **format)
 	init_colors3(&col);
 	i = 0;
 	while (ft_strcmp(*format + 1, col.colors[i][0]) != '}' && i < 27)
-		i++;
+		++i;
 	if (i != 27)
 	{
 		ft_putstr(col.colors[i][1]);
@@ -106,8 +106,8 @@ int		color_manager(va_list *ap, const char **format)
 			ft_putchar('m');
 		}
 		while (**format != '}')
-			(*format)++;
-		(*format)++;
+			++(*format);
+		++(*format);
 	}
 	return (i == 27 ? 0 : 1);
 }

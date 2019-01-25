@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:57:17 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/21 17:34:08 by evogel           ###   ########.fr       */
+/*   Updated: 2019/01/25 11:34:30 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include <strings.h>
 # include <stdarg.h>
 # include <stdlib.h>
-
-# include <stdio.h>
 
 /*
 ** Defines to more easily access struct elements

@@ -6,7 +6,7 @@
 #    By: evogel <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 16:47:44 by evogel            #+#    #+#              #
-#    Updated: 2019/01/25 11:31:47 by evogel           ###   ########.fr        #
+#    Updated: 2019/02/05 11:31:40 by evogel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -182,16 +182,16 @@ $(P_OBJS)/%.o: $(P_SRCS)/%.c
 	@$(call run_and_test, $(CC) $(CFLAGS) -o $@ -c $< -I$(INC) -I$(INC_L))
 
 $(P_OBJS):
-	@$(call run_and_test, mkdir -p $(P_OBJS))
+	@mkdir -p $(P_OBJS)
 
 $(P_OBJS_L):
-	@$(call run_and_test, mkdir -p $(P_OBJS_L))
+	@mkdir -p $(P_OBJS_L)
 
-test: all
-	@$(call run_and_test, $(CC) $(CFLAGS) -o $(P_OBJS)/main.o -c $(MAIN)main.c && $(CC) $(CFLAGS) -o $(MAIN)test $(P_OBJS)/main.o -L. -lftprintf)
+test: $(NAME)
+	@$(call run_and_test, $(CC) $(CFLAGS) -o $(MAIN)test $(MAIN)main.c $(NAME))
 
-sanitize: all
-	@$(call run_and_test, $(CC) $(CFLAGS) $(SANITIZE) -o $(P_OBJS)/main.o -c $(MAIN)main.c && $(CC) $(CFLAGS) $(SANITIZE) -o $(MAIN)test $(P_OBJS)/main.o -L. -lftprintf)
+sanitize: $(NAME)
+	@$(call run_and_test, $(CC) $(CFLAGS) $(SANITIZE) -o $(MAIN)test $(MAIN)main.c $(NAME))
 
 clean:
 	@$(call run_and_test, rm -rf $(P_OBJS) $(P_OBJS_L))

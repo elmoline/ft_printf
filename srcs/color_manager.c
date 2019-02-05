@@ -6,7 +6,7 @@
 /*   By: evogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 15:38:26 by evogel            #+#    #+#             */
-/*   Updated: 2019/01/21 16:41:34 by evogel           ###   ########.fr       */
+/*   Updated: 2019/02/05 11:12:16 by evogel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,20 @@ void	init_colors2(t_colors *col)
 
 int		color_manager(va_list *ap, const char **format)
 {
-	t_colors	col;
+	t_colors	*col;
 	int			i;
 
-	ft_bzero((void*)&col, sizeof(t_colors));
-	init_colors1(&col);
-	init_colors2(&col);
-	init_colors3(&col);
+	if (!(col = (t_colors*)ft_memalloc(sizeof(t_colors))))
+		return (0);
+	init_colors1(col);
+	init_colors2(col);
+	init_colors3(col);
 	i = 0;
-	while (ft_strcmp(*format + 1, col.colors[i][0]) != '}' && i < 27)
+	while (ft_strcmp(*format + 1, col->colors[i][0]) != '}' && i < 27)
 		++i;
 	if (i != 27)
 	{
-		ft_putstr(col.colors[i][1]);
+		ft_putstr(col->colors[i][1]);
 		if (i == 24 || i == 25)
 		{
 			ft_putnbr((unsigned char)va_arg(*ap, int));
@@ -109,5 +110,6 @@ int		color_manager(va_list *ap, const char **format)
 			++(*format);
 		++(*format);
 	}
+	free(col);
 	return (i == 27 ? 0 : 1);
 }
